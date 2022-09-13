@@ -1211,7 +1211,10 @@ class BackBroker(bt.BrokerBase):
                 self.pending.append(order)  # cannot yet be processed
 
             else:
-                self._try_exec(order)
+                # skip data filled with WeekDaysFiller
+                if order.data.high[0] != order.data.low[0] and order.data.high[0] != order.data.close[0] and order.data.high[0] != order.data.open[0]:
+                    self._try_exec(order)
+                    
                 if order.alive():
                     self.pending.append(order)
 

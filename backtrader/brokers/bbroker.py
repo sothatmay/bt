@@ -1212,7 +1212,7 @@ class BackBroker(bt.BrokerBase):
 
             else:
                 # skip data filled with WeekDaysFiller
-                if order.data.high[0] != order.data.low[0] and order.data.high[0] != order.data.close[0] and order.data.high[0] != order.data.open[0]:
+                if order.data.high[0] != order.data.low[0] or order.data.high[0] != order.data.close[0] or order.data.high[0] != order.data.open[0]:
                     self._try_exec(order)
                     
                 if order.alive():
